@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Christmas Prize Box Game</title></head><body><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Prize Box Game</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f9f1e7;
+            color: #2d2d2d;
+        }
+        h1 {
+            color: #e63946;
+            text-shadow: 2px 2px #1d3557;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .box {
+            width: 120px;
+            height: 120px;
+            background-color: #ffdbc5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 3px solid #1d3557;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .box:hover {
+            background-color: #f4a261;
+            transform: scale(1.1);
+        }
+        .shuffle-btn {
+            padding: 10px 25px;
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .shuffle-btn:hover {
+            background-color: #264653;
+        }
+        #message {
+            font-size: 18px;
+            color: #1d3557;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎄 Christmas Prize Box Game 🎁</h1>
+    <p>Click a box to find the hidden Christmas prize!</p>
+    <div class="container">
+        <div class="box" onclick="checkBox(0)">🎅 Box 1</div>
+        <div class="box" onclick="checkBox(1)">🎄 Box 2</div>
+        <div class="box" onclick="checkBox(2)">🎁 Box 3</div>
+        <div class="box" onclick="checkBox(3)">🎅 Box 4</div>
+        <div class="box" onclick="checkBox(4)">🎄 Box 5</div>
+    </div>
+    <button class="shuffle-btn" onclick="shufflePrize()">Shuffle the Prize</button>
+    <p id="message"></p>
+
+    <script>
+        let prizeIndex = Math.floor(Math.random() * 5); // Random prize box
+        let prizeAmount = 1;
+        let wrongAttempts = 0;
+
+        function checkBox(index) {
+            const messageElement = document.getElementById("message");
+            if (index === prizeIndex) {
+                messageElement.textContent = `🎉 Congratulations! You found the Christmas prize worth ₱${prizeAmount}!`;
+                prizeAmount = 1; // Reset the prize amount
+                wrongAttempts = 0; // Reset wrong attempts
+            } else {
+                wrongAttempts++;
+                prizeAmount = Math.min(prizeAmount + 1, 10); // Increment prize amount up to 10 pesos
+                messageElement.textContent = `🎄 Wrong box! The prize is now worth ₱${prizeAmount}. Keep trying!`;
+
+                if (wrongAttempts >= 3) {
+                    shufflePrize();
+                    wrongAttempts = 0; // Reset wrong attempts after shuffling
+                    messageElement.textContent += " 🔄 The prize has been shuffled!";
+                }
+            }
+        }
+
+        function shufflePrize() {
+            prizeIndex = Math.floor(Math.random() * 5); // Shuffle the prize box
+        }
+    </script>
+</body>
+</html></body></html>
