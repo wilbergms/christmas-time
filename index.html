@@ -83,6 +83,7 @@
             const messageElement = document.getElementById("message");
             if (index === prizeIndex) {
                 messageElement.textContent = `🎉 Congratulations! You found the Christmas prize worth ₱${prizeAmount}!`;
+                shufflePrize();
                 prizeAmount = 1; // Reset the prize amount
                 wrongAttempts = 0; // Reset wrong attempts
             } else {
