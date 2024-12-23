@@ -73,6 +73,10 @@
     </div>
     <button class="shuffle-btn" onclick="shufflePrize()">Shuffle the Prize</button>
     <p id="message"></p>
+    <!-- Sound Effects -->
+    <audio id="success-sound" src="sounds/success.mp3"></audio>
+    <audio id="wrong-sound" src="sounds/wrong.mp3"></audio>
+    <audio id="shuffle-sound" src="sounds/shuffle.mp3"></audio>
 
     <script>
         let prizeIndex = Math.floor(Math.random() * 5); // Random prize box
@@ -81,12 +85,16 @@
 
         function checkBox(index) {
             const messageElement = document.getElementById("message");
+            const successSound = document.getElementById("success-sound");
+            const wrongSound = document.getElementById("wrong-sound");
             if (index === prizeIndex) {
+                successSound.play();
                 messageElement.textContent = `🎉 Congratulations! You found the Christmas prize worth ₱${prizeAmount}!`;
                 shufflePrize();
                 prizeAmount = 1; // Reset the prize amount
                 wrongAttempts = 0; // Reset wrong attempts
             } else {
+                wrongSound.play();
                 wrongAttempts++;
                 prizeAmount = Math.min(prizeAmount + 1, 10); // Increment prize amount up to 10 pesos
                 messageElement.textContent = `🎄 Wrong box! The prize is now worth ₱${prizeAmount}. Keep trying!`;
@@ -100,6 +108,8 @@
         }
 
         function shufflePrize() {
+            const shuffleSound = document.getElementById("shuffle-sound");
+            shuffleSound.play();
             prizeIndex = Math.floor(Math.random() * 5); // Shuffle the prize box
         }
     </script>
